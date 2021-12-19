@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: /dockerapp
+    working_directory: /devops
     docker:
       - image: docker
     steps:
@@ -10,10 +10,18 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --no-cache py-pip
-            pip install docker-compose
+            apk add --no-cache py3-pip
+            pip3 install docker-compose
       - run:
           name: Run tests
           command: |
             docker-compose up -d
-            docker-compose run dockerapp python test.py
+            docker-compose run devops python test.py
+      - deploy
+        name: Push application Docker image
+        command: |
+          docker login -e $DOCKER_HUB_EMAIL -u $DOCKER_HUB_USER_ID -p $DOCKER_HUB_PWD
+          docker tag devops_devops $DOCKER_HUB_USER_ID/devops:$CIRCLE_SHA1
+          docker tag devops_devops $DOCKER_HUB_USER_ID/devops:latest
+          docker push $DOCKER_HUB_USER_ID/devops:$CIRCLE_SHA1
+          docker push $DOCKER_HUB_USER_ID/devops:latest
