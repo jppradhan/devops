@@ -10,6 +10,8 @@ services:
       - my_net
   redis:
     image: redis
+    ports:
+     - "6379:6379"
     networks:
       - my_net
 networks:
