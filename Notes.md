@@ -23,19 +23,25 @@ Docker compose build rebuilds all the images.
 ```
 
 ### Create a none network
+
 `docker run -d --net none busybox sleep 1000`
 
 ### create a bridge network
+
 `docker network create --driver bridge my_bridge_network`
 
 #### connect with bridge network
+
 `docker network connect bridge container_3`
-
-
 
 ### Overlay network
 
-
 ### Docker swarm
+
 ### Docker node
+
 ### Docker stack
+
+### Sharing code
+
+`docker run -d -p 80:3000 -v $(pwd):/app react-app`
