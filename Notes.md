@@ -45,3 +45,7 @@ Docker compose build rebuilds all the images.
 ### Sharing code
 
 `docker run -d -p 80:3000 -v $(pwd):/app react-app`
+
+### Tutorial
+
+[docker + kubernetes](https://www.youtube.com/watch?v=wtKef83kmUA&list=PL0hSJrxggIQoKLETBSmgbbvE4FO_eEgoB)
